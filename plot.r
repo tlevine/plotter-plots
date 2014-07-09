@@ -35,11 +35,16 @@ properties$zoning <- gsub('  *A?', '', properties$zoning)
 
 raised.ranch <- subset(properties, bldg_style_code == '02')
 raised.ranch$zoning <- factor(raised.ranch$zoning)
+raised.ranch$cex <- sqrt(acreage) * 5
 
-plot(acreage ~ year_built,
-     col = zoning,
+
+f <- faces(raised.ranch[architecture], plot.faces = FALSE)
+plot(assessed_total_2014 ~ year_built,
+     col = zoning, cex = cex,
      main = 'Raised ranch houses in Scarsdale',
      xlab = 'Year built',
+     ylab = 'Preliminary 2014 assessed value',
+     type = 'n',
      data = raised.ranch)
 legend('topright', title = 'Zoning',
        levels(raised.ranch$zoning),
