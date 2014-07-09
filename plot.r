@@ -41,6 +41,7 @@ postscript('raised-ranch.ps',
            horizontal = FALSE, onefile = FALSE, paper = 'special',
            width = 16.5, height = 11.7)
 
+par(family = 'HersheySans')
 plot(assessed_total_2014 ~ year_built,
      main = 'Raised ranch houses in Scarsdale',
      xlab = 'Year built',
@@ -49,10 +50,17 @@ plot(assessed_total_2014 ~ year_built,
      xlim = c(1950, 1985),
      ylim = c(.8 * min(raised.ranch$assessed_total_2014), max(raised.ranch$assessed_total_2014)),
      bty = 'n',
+     axes = F,
+     font.main = 2, font.lab = 2,
+     sub = 'Chernoff faces represent architectural styles.',
      data = raised.ranch)
 
+axis(1, at = seq(1955, 1980, 5))
+axis(2, at = seq(8e4, 18e4, 2e4), labels = paste0('$', seq(8,18,2), '00,000'))
+
 text(1950, max(raised.ranch$assessed_total_2014),
-     'Preliminary 2014\nassessed value', xpd = TRUE)
+     font = 2,
+     'Preliminary 2014 assessed value', xpd = TRUE)
 
 f <- faces(raised.ranch[architecture], plot.faces = FALSE,
            ncolors = 8, labels = raised.ranch$property_number)
