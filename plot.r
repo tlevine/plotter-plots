@@ -48,7 +48,7 @@ plot(assessed_total_2014 ~ year_built,
      ylab = '',
      type = 'n',
      xlim = c(1950, 1985),
-     ylim = c(.8 * min(raised.ranch$assessed_total_2014), max(raised.ranch$assessed_total_2014)),
+     ylim = c(.8 * min(raised.ranch$assessed_total_2014), round(max(raised.ranch$assessed_total_2014), -6)),
      bty = 'n',
      axes = F,
      font.main = 2, font.lab = 2,
@@ -67,15 +67,21 @@ f <-
   faces(raised.ranch[architecture], plot.faces = FALSE,
         ncolors = 8, labels = raised.ranch$property_number)
 
-selection <- raised.ranch$zoning == 'A2'
-f$xy <- f$xy[,selection]
-f$faces <- f$faces[selection]
-
-plot.faces(f,
+subplot <- function(f, zoning.number) {
+  selection <- raised.ranch$zoning == paste0('A',zoning.number)
+  f$xy <- f$xy[,selection]
+  f$faces <- f$faces[selection]
+  par(col = zoning.number)
+  plot.faces(f,
            raised.ranch$year_built[selection],
            raised.ranch$assessed_total_2014[selection],
            face.type = 0,
            width = ceiling((max(raised.ranch$year_built) - min(raised.ranch$year_built)) / sqrt(nrow(raised.ranch))),
            height = ceiling((max(raised.ranch$assessed_total_2014) - min(raised.ranch$assessed_total_2014)) / sqrt(nrow(raised.ranch))))
+}
+
+for (i in 2:5) {
+  subplot(f, i)
+}
 
 dev.off()
