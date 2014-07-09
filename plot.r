@@ -26,9 +26,13 @@ for (column in architecture) {
   properties[,column] <- as.numeric(properties[,column])
 }
 properties$year_built <- as.numeric(properties$year_built)
+properties$bldg_style_code <- sub(' .*', '', properties$bldg_style)
 
 # zoning
 # year_built
 # acreage
+
+plot(half_bathrooms ~ year_built,
+     data = subset(properties, property_class == "210 Single Res"))
 
 # write.csv(properties, file = 'properties.csv', row.names = FALSE)
