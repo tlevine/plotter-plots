@@ -67,6 +67,7 @@ f <- faces(raised.ranch[architecture], plot.faces = FALSE,
            ncolors = 8, labels = raised.ranch$property_number)
 
 plot.faces(f, raised.ranch$year_built, raised.ranch$assessed_total_2014,
+           face.type = 0,
            width = ceiling((max(raised.ranch$year_built) - min(raised.ranch$year_built)) / sqrt(nrow(raised.ranch))),
            height = ceiling((max(raised.ranch$assessed_total_2014) - min(raised.ranch$assessed_total_2014)) / sqrt(nrow(raised.ranch))))
 
