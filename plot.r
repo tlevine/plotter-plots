@@ -27,12 +27,22 @@ for (column in architecture) {
 }
 properties$year_built <- as.numeric(properties$year_built)
 properties$bldg_style_code <- sub(' .*', '', properties$bldg_style)
+properties$zoning <- gsub('  *A?', '', properties$zoning)
 
 # zoning
 # year_built
 # acreage
 
-plot(half_bathrooms ~ year_built,
-     data = subset(properties, property_class == "210 Single Res"))
+raised.ranch <- subset(properties, bldg_style_code == '02')
+raised.ranch$zoning <- factor(raised.ranch$zoning)
+
+plot(acreage ~ year_built,
+     col = zoning,
+     main = 'Raised ranch houses in Scarsdale',
+     xlab = 'Year built',
+     data = raised.ranch)
+legend('topright', title = 'Zoning',
+       levels(raised.ranch$zoning),
+       col = 1:length(levels(raised.ranch$zoning)), pch = 1)
 
 # write.csv(properties, file = 'properties.csv', row.names = FALSE)
