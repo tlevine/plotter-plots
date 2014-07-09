@@ -36,13 +36,17 @@ properties$zoning <- gsub('  *A?', '', properties$zoning)
 raised.ranch <- subset(properties, bldg_style_code == '02')
 raised.ranch$zoning <- factor(raised.ranch$zoning)
 
-par(mar = c(5,10,4,2))
 plot(assessed_total_2014 ~ year_built,
      main = 'Raised ranch houses in Scarsdale',
      xlab = 'Year built',
-     ylab = '', # 'Preliminary 2014 assessed value',
-     type = 'n', las = 2,
+     ylab = '',
+     type = 'n', las = 1,
+     xlim = c(1950, 1985),
+     ylim = c(.8 * min(raised.ranch$assessed_total_2014), max(raised.ranch$assessed_total_2014)),
+     bty = 'n',
      data = raised.ranch)
+text(min(raised.ranch$year_built), max(raised.ranch$assessed_total_2014),
+     'Preliminary 2014\nassessed value', xpd = TRUE)
 f <- faces(raised.ranch[architecture], plot.faces = FALSE,
            ncolors = 8, labels = raised.ranch$property_number)
 
