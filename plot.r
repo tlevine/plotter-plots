@@ -35,19 +35,18 @@ properties$zoning <- gsub('  *A?', '', properties$zoning)
 
 raised.ranch <- subset(properties, bldg_style_code == '02')
 raised.ranch$zoning <- factor(raised.ranch$zoning)
-raised.ranch$cex <- sqrt(acreage) * 5
 
-
-f <- faces(raised.ranch[architecture], plot.faces = FALSE)
 plot(assessed_total_2014 ~ year_built,
-     col = zoning, cex = cex,
      main = 'Raised ranch houses in Scarsdale',
      xlab = 'Year built',
      ylab = 'Preliminary 2014 assessed value',
      type = 'n',
+     ylim = c(0,max(assessed_total_2014)),
      data = raised.ranch)
-legend('topright', title = 'Zoning',
-       levels(raised.ranch$zoning),
-       col = 1:length(levels(raised.ranch$zoning)), pch = 1)
+f <- faces(raised.ranch[architecture], plot.faces = FALSE)
+
+plot.faces(f, raised.ranch$year_built, raised.ranch$assessed_total_2014,
+           width = ceiling((max(raised.ranch$year_built) - min(raised.ranch$year_built)) / sqrt(nrow(raised.ranch))),
+           height = ceiling((max(raised.ranch$assessed_total_2014) - min(raised.ranch$assessed_total_2014)) / sqrt(nrow(raised.ranch))))
 
 # write.csv(properties, file = 'properties.csv', row.names = FALSE)
