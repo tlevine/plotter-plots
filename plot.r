@@ -37,7 +37,9 @@ properties$zoning <- gsub('  *A?', '', properties$zoning)
 raised.ranch <- subset(properties, bldg_style_code == '02')
 raised.ranch$zoning <- factor(raised.ranch$zoning)
 
-postscript('raised-ranch.ps', width = 16.5, height = 11.7)
+postscript('raised-ranch.ps',
+           horizontal = FALSE, onefile = FALSE, paper = 'special',
+           width = 16.5, height = 11.7)
 
 plot(assessed_total_2014 ~ year_built,
      main = 'Raised ranch houses in Scarsdale',
