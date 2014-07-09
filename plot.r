@@ -11,6 +11,7 @@ library(aplpack)
 
 if (!('properties' %in% ls())) {
   properties <- query('select * from properties;')
+  write.csv(properties, file = 'properties.csv', row.names = FALSE)
 }
 
 assessment   <- c('assessed_land_2014', 'assessed_land_2013_fmv', 'assessed_land_2013',
@@ -45,13 +46,13 @@ plot(assessed_total_2014 ~ year_built,
      ylim = c(.8 * min(raised.ranch$assessed_total_2014), max(raised.ranch$assessed_total_2014)),
      bty = 'n',
      data = raised.ranch)
-text(min(raised.ranch$year_built), max(raised.ranch$assessed_total_2014),
+
+text(1950, max(raised.ranch$assessed_total_2014),
      'Preliminary 2014\nassessed value', xpd = TRUE)
+
 f <- faces(raised.ranch[architecture], plot.faces = FALSE,
            ncolors = 8, labels = raised.ranch$property_number)
 
 plot.faces(f, raised.ranch$year_built, raised.ranch$assessed_total_2014,
            width = ceiling((max(raised.ranch$year_built) - min(raised.ranch$year_built)) / sqrt(nrow(raised.ranch))),
            height = ceiling((max(raised.ranch$assessed_total_2014) - min(raised.ranch$assessed_total_2014)) / sqrt(nrow(raised.ranch))))
-
-# write.csv(properties, file = 'properties.csv', row.names = FALSE)
