@@ -63,7 +63,7 @@ text(1950, max(raised.ranch$assessed_total_2014),
      font = 2,
      'Preliminary 2014 assessed value', xpd = TRUE)
 
-f.a2 <- f.a3 <- f.a4 <- f.a5 <- f.all <-
+f.all <-
   faces(raised.ranch[architecture], plot.faces = FALSE,
         ncolors = 8, labels = raised.ranch$property_number)
 
@@ -72,18 +72,21 @@ f.a3$faces <- f.all$faces[raised.ranch$zoning == 'A3']
 f.a4$faces <- f.all$faces[raised.ranch$zoning == 'A4']
 f.a5$faces <- f.all$faces[raised.ranch$zoning == 'A5']
 
-subplot <- function(f) {
+subplot <- function(f.all, zoning) {
+  f <- f.all
+# f$xy <- f$faces <- NULL
+# f$xy <- matrix(f.all$xy[,selection])
+# dimnames(f$xy) <- dimnames(f.all$xy)
+  f$faces <-f.all$faces[selection]
+
   plot.faces(f, raised.ranch$year_built, raised.ranch$assessed_total_2014,
              face.type = 0,
              width = ceiling((max(raised.ranch$year_built) - min(raised.ranch$year_built)) / sqrt(nrow(raised.ranch))),
              height = ceiling((max(raised.ranch$assessed_total_2014) - min(raised.ranch$assessed_total_2014)) / sqrt(nrow(raised.ranch))))
 }
 
-subplot(f.all)
-
-#par(col = 2); subplot(f.a2)
-#par(col = 3); subplot(f.a3)
-#par(col = 4); subplot(f.a4)
-#par(col = 5); subplot(f.a5)
+for (i in 2:5) {
+  subplot(f.all, i)
+}
 
 dev.off()
