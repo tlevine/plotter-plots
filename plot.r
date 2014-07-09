@@ -37,6 +37,8 @@ properties$zoning <- gsub('  *A?', '', properties$zoning)
 raised.ranch <- subset(properties, bldg_style_code == '02')
 raised.ranch$zoning <- factor(raised.ranch$zoning)
 
+postscript('raised-ranch.ps', width = 16.5, height = 11.7)
+
 plot(assessed_total_2014 ~ year_built,
      main = 'Raised ranch houses in Scarsdale',
      xlab = 'Year built',
@@ -56,3 +58,5 @@ f <- faces(raised.ranch[architecture], plot.faces = FALSE,
 plot.faces(f, raised.ranch$year_built, raised.ranch$assessed_total_2014,
            width = ceiling((max(raised.ranch$year_built) - min(raised.ranch$year_built)) / sqrt(nrow(raised.ranch))),
            height = ceiling((max(raised.ranch$assessed_total_2014) - min(raised.ranch$assessed_total_2014)) / sqrt(nrow(raised.ranch))))
+
+dev.off()
