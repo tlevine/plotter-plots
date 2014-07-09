@@ -41,12 +41,12 @@ postscript('raised-ranch.ps',
            horizontal = FALSE, onefile = FALSE, paper = 'special',
            width = 16.5, height = 11.7)
 
-par(family = 'HersheySans')
+par(family = 'HersheySans', las = 1)
 plot(assessed_total_2014 ~ year_built,
      main = 'Raised ranch houses in Scarsdale',
      xlab = 'Year built',
      ylab = '',
-     type = 'n', las = 1,
+     type = 'n',
      xlim = c(1950, 1985),
      ylim = c(.8 * min(raised.ranch$assessed_total_2014), max(raised.ranch$assessed_total_2014)),
      bty = 'n',
@@ -56,7 +56,8 @@ plot(assessed_total_2014 ~ year_built,
      data = raised.ranch)
 
 axis(1, at = seq(1955, 1980, 5))
-axis(2, at = seq(8e4, 18e4, 2e4), labels = paste0('$', seq(8,18,2), '00,000'))
+axis(2, at = seq(8e5, 18e5, 2e5),
+     labels = paste0('$', c('800', '1,000', '1,200', '1,400', '1,600', '1,800'), ',000'))
 
 text(1950, max(raised.ranch$assessed_total_2014),
      font = 2,
