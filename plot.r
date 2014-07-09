@@ -56,7 +56,7 @@ plot(assessed_total_2014 ~ year_built,
      data = raised.ranch)
 
 axis(1, at = seq(1955, 1980, 5))
-axis(2, at = seq(8e5, 18e5, 2e5),
+axis(2, at = seq(8e5, 18e5, 2e5), line = -4,
      labels = paste0('$', c('800', '1,000', '1,200', '1,400', '1,600', '1,800'), ',000'))
 
 text(1950, max(raised.ranch$assessed_total_2014),
