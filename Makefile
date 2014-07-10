@@ -6,5 +6,4 @@ raised-ranch.hpgl: raised-ranch.ps
 	sed -i '1 s/^.*$$/IN;SC0,15522,0,10504;PU;LT;/' raised-ranch.hpgl
 
 brussels-berlin.hpgl:
-	pstoedit -f "hpgl:-penplotter" brussels-berlin.ps brussels-berlin.hpgl
-	sed -i '1 s/^.*$$/IN;SC0,15522,0,10504;PU;LT;/' brussels-berlin.hpgl
+	pstoedit -f plot-hpgl brussels-berlin.ps brussels-berlin.hpgl
