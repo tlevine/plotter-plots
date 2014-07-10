@@ -2,7 +2,6 @@ raised-ranch.ps:
 	Rscript plot.r
 
 raised-ranch.hpgl: raised-ranch.ps
-	# [-pencolorsfromfile]
-	# read pen colors from file drvhpgl.pencolors in pstoedit data directory
-	# [-pencolors number]
-	pstoedit -f "hpgl:-pencolors 5" raised-ranch.ps raised-ranch.hpgl
+	# pstoedit -f gmfa raised-ranch.ps raised-ranch.gmfa
+	# HPGL_ASSIGN_COLORS=yes HPGL_VERSION=2 plot -T hpgl raised-ranch.gmfa > raised-ranch.hpgl 
+	pstoedit -f "plot-hpgl:HPGL_VERSION=2" raised-ranch.ps raised-ranch.hpgl
